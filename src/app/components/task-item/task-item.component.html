@@ -1,0 +1,12 @@
+<div [ngClass]='{ reminder: task.reminder }' class='task' (dblclick)='onToggle(task)'>
+    <h3>{{ task.text }}<fa-icon (click)='onDelete(task)' [ngStyle]="{'color': 'red'}" [icon]='faTimes' class='deleteTaskIcon'></fa-icon></h3>
+    <p>{{ task.day }}</p>
+    <h1 *ngIf='task.notes && showExpandedTask' (click)='onExpand(task, showExpandedTask)' style='margin-bottom: 0px;'>Close</h1>
+    <h1 *ngIf='task.notes && !showExpandedTask' (click)='onExpand(task, showExpandedTask)' style='margin-bottom: 0px;'>Expand</h1>
+    <div *ngIf='showExpandedTask'>
+        <hr style='margin-top: 5px; margin-bottom: 5px;'>
+        <p>Notes: {{ task.notes }}</p>
+        <p *ngIf='task.reminder; else notReminder'>Reminder: On</p>
+        <ng-template #notReminder>Reminder: Off</ng-template>
+    </div>
+</div>
